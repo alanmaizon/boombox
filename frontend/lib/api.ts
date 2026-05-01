@@ -39,6 +39,89 @@ export type TaxCalcPayload = {
   tax_year: number;
 };
 
+export type IncomeSummaryResponse = {
+  tax_year: number;
+  total_income: number;
+  record_count: number;
+  disclaimer?: string;
+  mock?: boolean;
+};
+
+export type ExpensesSummaryResponse = {
+  tax_year: number;
+  total_allowable_expenses: number;
+  record_count: number;
+  disclaimer?: string;
+  mock?: boolean;
+};
+
+export type MileageSummaryResponse = {
+  tax_year: number;
+  total_deductible_mileage: number;
+  record_count: number;
+  disclaimer?: string;
+  mock?: boolean;
+};
+
+export type FilingDraftPayload = {
+  tax_year: number;
+  preliminary_tax_paid?: number;
+};
+
+export type Form11Line = {
+  panel: string;
+  field_ref: string;
+  description: string;
+  value: number;
+  source?: string | null;
+};
+
+export type FilingDraftResponse = {
+  tax_year: number;
+  status: string;
+  lines: Form11Line[];
+  total_liability_estimate: number;
+  preliminary_tax_paid: number;
+  balance_due: number;
+  filing_deadline: string;
+  disclaimer: string;
+  mock?: boolean;
+};
+
+export type AdvisoryQueryPayload = {
+  tax_year: number;
+  question: string;
+  additional_income?: number;
+  additional_expense?: number;
+  additional_mileage_km?: number;
+  mileage_round_trip?: boolean;
+  mileage_reimbursed?: boolean;
+};
+
+export type AdvisoryFigures = {
+  total_liability: number;
+  net_profit: number;
+  ytd_income?: number;
+  ytd_expenses?: number;
+  ytd_mileage_deduction?: number;
+};
+
+export type AdvisoryResponse = {
+  question: string;
+  answer: string;
+  citations: string[];
+  caveats: string[];
+  baseline: AdvisoryFigures;
+  scenario: AdvisoryFigures;
+  delta: {
+    total_liability: number;
+    net_profit: number;
+    net_retention?: number;
+  };
+  disclaimer: string;
+  mock?: boolean;
+};
+
 async function apiPost<T>(path: string, body: unknown): Promise<T> {
   const res = await fetch(`${BACKEND_URL}${path}`, {
     method: "POST",
@@ -66,22 +149,28 @@ export const api = {
     apiPost("/income/ingest", payload),
 
   getIncomeSummary: (taxYear: number) =>
-    apiGet(`/income/summary?tax_year=${taxYear}`),
+    apiGet<IncomeSummaryResponse>(`/income/summary?tax_year=${taxYear}`),
 
   ingestExpense: (payload: ExpenseIngestionPayload) =>
     apiPost("/expenses/ingest", payload),
 
   getExpensesSummary: (taxYear: number) =>
-    apiGet(`/expenses/summary?tax_year=${taxYear}`),
+    apiGet<ExpensesSummaryResponse>(`/expenses/summary?tax_year=${taxYear}`),
 
   recordMileage: (payload: MileageRecordPayload) =>
     apiPost("/mileage/record", payload),
 
   getMileageSummary: (taxYear: number) =>
-    apiGet(`/mileage/summary?tax_year=${taxYear}`),
+    apiGet<MileageSummaryResponse>(`/mileage/summary?tax_year=${taxYear}`),
 
   calculateTax: (payload: TaxCalcPayload) =>
     apiPost("/tax/calculate", payload),
+
+  draftFiling: (payload: FilingDraftPayload) =>
+    apiPost<FilingDraftResponse>("/filing/draft", payload),
+
+  askAdvisory: (payload: AdvisoryQueryPayload) =>
+    apiPost<AdvisoryResponse>("/advisory/ask", payload),
 
   getHealth: () => apiGet("/health"),
 };

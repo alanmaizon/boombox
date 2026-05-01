@@ -15,7 +15,7 @@ def use_test_db(tmp_path, monkeypatch):
     db_path = tmp_path / "test_boombox.db"
     monkeypatch.setenv("DATABASE_URL", f"sqlite:///{db_path}")
     # Force storage module to re-create engine with test DB
-    import backend.storage as storage
+    import storage
     import sqlalchemy as sa
     storage._engine = sa.create_engine(
         f"sqlite:///{db_path}",
@@ -23,7 +23,7 @@ def use_test_db(tmp_path, monkeypatch):
     )
     storage.metadata.create_all(storage._engine)
     # Clear tax data cache so test monkeypatches take effect
-    from backend.tools.tax_data import load_tax_rules
+    from tools.tax_data import load_tax_rules
     load_tax_rules.cache_clear()
     yield
     load_tax_rules.cache_clear()

@@ -11,6 +11,7 @@ services:
       - DATABASE_URL=sqlite:////data/boombox.db
       - BOOMBOX_MOCK=${BOOMBOX_MOCK:-false}
       - BOOMBOX_CORS_ORIGINS=http://localhost:3000
+      - API_KEY=${API_KEY}
     volumes:
       - boombox_data:/data
     healthcheck:

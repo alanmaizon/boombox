@@ -13,9 +13,9 @@ from datetime import date
 from decimal import Decimal, ROUND_HALF_UP
 from typing import Any
 
-from backend.models import MileageRecord
-from backend.storage import get_mileage_records, get_ytd_mileage_deduction, persist_mileage_record
-from backend.tools.tax_data import load_tax_rules
+from models import MileageRecord
+from storage import get_mileage_records, get_ytd_mileage_deduction, persist_mileage_record
+from tools.tax_data import load_tax_rules
 
 _MOCK = os.getenv("BOOMBOX_MOCK", "false").lower() == "true"
 

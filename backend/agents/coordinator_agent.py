@@ -15,12 +15,12 @@ from pathlib import Path
 
 from google.adk.agents import Agent
 
-from backend.agents.advisory_agent import AdvisoryAgent
-from backend.agents.calculator_agent import CalculatorAgent
-from backend.agents.expense_agent import ExpenseAgent
-from backend.agents.filing_agent import FilingAgent
-from backend.agents.income_agent import IncomeAgent
-from backend.agents.mileage_agent import MileageAgent
+from agents.advisory_agent import AdvisoryAgent
+from agents.calculator_agent import CalculatorAgent
+from agents.expense_agent import ExpenseAgent
+from agents.filing_agent import FilingAgent
+from agents.income_agent import IncomeAgent
+from agents.mileage_agent import MileageAgent
 
 _PROMPT_PATH = Path(__file__).parent / "prompts" / "coordinator_agent.md"
 _SYSTEM_PROMPT = _PROMPT_PATH.read_text()

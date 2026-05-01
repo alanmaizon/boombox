@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from backend.tools.tax_data import load_tax_rules
+from tools.tax_data import load_tax_rules
 
 
 class TestTaxDataLoader:
@@ -57,7 +57,7 @@ class TestTaxDataLoader:
 
     def test_missing_file_raises_file_not_found(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
         """Loading a non-existent year should raise FileNotFoundError."""
-        from backend.tools import tax_data as td
+        from tools import tax_data as td
         monkeypatch.setattr(td, "_DATA_DIR", tmp_path)
         td.load_tax_rules.cache_clear()
         with pytest.raises(FileNotFoundError):

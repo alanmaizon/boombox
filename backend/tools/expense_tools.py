@@ -9,8 +9,8 @@ from datetime import date
 from decimal import Decimal
 from typing import Any
 
-from backend.models import ExpenseCategory, ExpenseRecord
-from backend.storage import get_expense_records, get_ytd_allowable_expenses, persist_expense_record
+from models import ExpenseCategory, ExpenseRecord
+from storage import get_expense_records, get_ytd_allowable_expenses, persist_expense_record
 
 _MOCK = os.getenv("BOOMBOX_MOCK", "false").lower() == "true"
 

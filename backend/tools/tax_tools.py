@@ -13,14 +13,14 @@ import os
 from decimal import Decimal, ROUND_HALF_UP
 from typing import Any
 
-from backend.models import (
+from models import (
     IncomeTaxResult,
     PRSIResult,
     TaxBandResult,
     TaxPosition,
     USCResult,
 )
-from backend.tools.tax_data import load_tax_rules
+from tools.tax_data import load_tax_rules
 
 _MOCK = os.getenv("BOOMBOX_MOCK", "false").lower() == "true"
 

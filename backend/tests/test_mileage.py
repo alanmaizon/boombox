@@ -8,7 +8,7 @@ from decimal import Decimal
 
 import pytest
 
-from backend.tools.mileage_tools import compute_mileage
+from tools.mileage_tools import compute_mileage
 
 
 class TestMileageComputation:

@@ -57,3 +57,5 @@ dist/
 *_credentials*
 service_account*.json
 
+# Virtual environments
+.venv

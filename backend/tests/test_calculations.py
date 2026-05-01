@@ -14,7 +14,7 @@ from decimal import Decimal
 
 import pytest
 
-from backend.tools.tax_tools import compute_income_tax, compute_prsi, compute_usc
+from tools.tax_tools import compute_income_tax, compute_prsi, compute_usc
 
 
 # ---------------------------------------------------------------------------
@@ -154,7 +154,7 @@ class TestTaxPosition:
         - Mileage deduction: €500
         - Net profit: €38,500
         """
-        from backend.tools.tax_tools import compute_tax_position
+        from tools.tax_tools import compute_tax_position
 
         result = compute_tax_position(42000, 3000, 500, 2025)
 
@@ -165,7 +165,7 @@ class TestTaxPosition:
 
     def test_disclaimer_always_present(self) -> None:
         """Tax position result must always include the disclaimer."""
-        from backend.tools.tax_tools import compute_tax_position
+        from tools.tax_tools import compute_tax_position
 
         result = compute_tax_position(20000, 0, 0, 2025)
         assert "disclaimer" in result

@@ -15,10 +15,10 @@ from pathlib import Path
 
 from google.adk.agents import Agent
 
-from backend.tools.expense_tools import get_ytd_expenses_summary
-from backend.tools.income_tools import get_ytd_income_summary
-from backend.tools.mileage_tools import get_ytd_mileage_summary
-from backend.tools.tax_tools import compute_tax_position
+from tools.expense_tools import get_ytd_expenses_summary
+from tools.income_tools import get_ytd_income_summary
+from tools.mileage_tools import get_ytd_mileage_summary
+from tools.tax_tools import compute_tax_position
 
 _PROMPT_PATH = Path(__file__).parent / "prompts" / "calculator_agent.md"
 _SYSTEM_PROMPT = _PROMPT_PATH.read_text()

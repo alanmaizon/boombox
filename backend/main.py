@@ -28,11 +28,13 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from backend.storage import init_db
-from backend.tools.expense_tools import get_ytd_expenses_summary, persist_expense
-from backend.tools.income_tools import get_ytd_income_summary, persist_invoice
-from backend.tools.mileage_tools import get_ytd_mileage_summary, persist_mileage_trip
-from backend.tools.tax_tools import compute_tax_position
+from storage import init_db
+from tools.advisory_tools import simulate_what_if
+from tools.expense_tools import get_ytd_expenses_summary, persist_expense
+from tools.filing_tools import draft_form_11
+from tools.income_tools import get_ytd_income_summary, persist_invoice
+from tools.mileage_tools import get_ytd_mileage_summary, persist_mileage_trip
+from tools.tax_tools import compute_tax_position
 
 _MOCK = os.getenv("BOOMBOX_MOCK", "false").lower() == "true"
 
@@ -105,6 +107,21 @@ class TaxCalcRequest(BaseModel):
     allowable_expenses: float = Field(ge=0)
     mileage_deduction: float = Field(ge=0)
     tax_year: int
+
+
+class FilingDraftRequest(BaseModel):
+    tax_year: int
+    preliminary_tax_paid: float = Field(default=0.0, ge=0)
+
+
+class AdvisoryQuery(BaseModel):
+    tax_year: int
+    question: str = Field(min_length=1, max_length=2000)
+    additional_income: float = Field(default=0.0, ge=0)
+    additional_expense: float = Field(default=0.0, ge=0)
+    additional_mileage_km: float = Field(default=0.0, ge=0)
+    mileage_round_trip: bool = True
+    mileage_reimbursed: bool = False
 
 
 # ---------------------------------------------------------------------------
@@ -222,6 +239,49 @@ def calculate_tax(req: TaxCalcRequest) -> dict[str, Any]:
             tax_year=req.tax_year,
         )
         return result
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+# ---------------------------------------------------------------------------
+# Filing — DRAFT only, never submits to Revenue
+# ---------------------------------------------------------------------------
+
+
+@app.post("/filing/draft")
+def filing_draft(req: FilingDraftRequest) -> dict[str, Any]:
+    """Produce a DRAFT Form 11 for the given tax year. Never submits."""
+    try:
+        return draft_form_11(
+            tax_year=req.tax_year,
+            preliminary_tax_paid=req.preliminary_tax_paid,
+        )
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+# ---------------------------------------------------------------------------
+# Advisory — what-if simulation, citations required
+# ---------------------------------------------------------------------------
+
+
+@app.post("/advisory/ask")
+def advisory_ask(query: AdvisoryQuery) -> dict[str, Any]:
+    """Simulate a what-if scenario. Returns figures + citations + disclaimer."""
+    try:
+        return simulate_what_if(
+            tax_year=query.tax_year,
+            question=query.question,
+            additional_income=query.additional_income,
+            additional_expense=query.additional_expense,
+            additional_mileage_km=query.additional_mileage_km,
+            mileage_round_trip=query.mileage_round_trip,
+            mileage_reimbursed=query.mileage_reimbursed,
+        )
     except FileNotFoundError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
     except Exception as exc:

@@ -16,9 +16,10 @@ from pathlib import Path
 
 from google.adk.agents import Agent
 
-from backend.tools.expense_tools import get_ytd_expenses_summary
-from backend.tools.income_tools import get_ytd_income_summary
-from backend.tools.tax_tools import compute_tax_position
+from tools.expense_tools import get_ytd_expenses_summary
+from tools.filing_tools import draft_form_11
+from tools.income_tools import get_ytd_income_summary
+from tools.tax_tools import compute_tax_position
 
 _PROMPT_PATH = Path(__file__).parent / "prompts" / "filing_agent.md"
 _SYSTEM_PROMPT = _PROMPT_PATH.read_text()
@@ -49,5 +50,10 @@ class FilingAgent(Agent):
             model=os.getenv("BOOMBOX_MODEL", "gemini-2.0-flash"),
             description="Drafts Form 11 line items for review. NEVER files with Revenue.",
             instruction=_SYSTEM_PROMPT,
-            tools=[compute_tax_position, get_ytd_income_summary, get_ytd_expenses_summary],
+            tools=[
+                draft_form_11,
+                compute_tax_position,
+                get_ytd_income_summary,
+                get_ytd_expenses_summary,
+            ],
         )

@@ -13,9 +13,9 @@ from unittest.mock import patch, MagicMock
 
 import pytest
 
-from backend.tools.income_tools import persist_invoice
-from backend.tools.expense_tools import persist_expense
-from backend.tools.mileage_tools import persist_mileage_trip
+from tools.income_tools import persist_invoice
+from tools.expense_tools import persist_expense
+from tools.mileage_tools import persist_mileage_trip
 
 
 class TestSanitization:
@@ -23,7 +23,7 @@ class TestSanitization:
 
     def test_invoice_notes_not_persisted(self) -> None:
         """Notes field should be stripped (set to None) before DB write."""
-        with patch("backend.tools.income_tools.persist_income_record") as mock_persist:
+        with patch("tools.income_tools.persist_income_record") as mock_persist:
             mock_persist.return_value = 1
             persist_invoice(
                 invoice_number="INV-001",
@@ -39,7 +39,7 @@ class TestSanitization:
 
     def test_expense_notes_not_persisted(self) -> None:
         """Expense notes should be stripped before DB write."""
-        with patch("backend.tools.expense_tools.persist_expense_record") as mock_persist:
+        with patch("tools.expense_tools.persist_expense_record") as mock_persist:
             mock_persist.return_value = 1
             persist_expense(
                 vendor="Eir",
@@ -55,7 +55,7 @@ class TestSanitization:
 
     def test_mileage_notes_not_persisted(self) -> None:
         """Mileage notes should be stripped before DB write."""
-        with patch("backend.tools.mileage_tools.persist_mileage_record") as mock_persist:
+        with patch("tools.mileage_tools.persist_mileage_record") as mock_persist:
             mock_persist.return_value = 1
             persist_mileage_trip(
                 trip_date="2025-02-14",
@@ -75,7 +75,7 @@ class TestStructuredOutput:
 
     def test_income_tax_result_has_required_fields(self) -> None:
         """IncomeTaxResult must include all required fields."""
-        from backend.tools.tax_tools import compute_income_tax
+        from tools.tax_tools import compute_income_tax
         result = compute_income_tax(Decimal("30000"), 2025)
         assert hasattr(result, "gross_tax")
         assert hasattr(result, "net_income_tax")
@@ -86,7 +86,7 @@ class TestStructuredOutput:
 
     def test_tax_position_disclaimer_not_softened(self) -> None:
         """The disclaimer must contain 'tax advice' — never soften it."""
-        from backend.tools.tax_tools import compute_tax_position
+        from tools.tax_tools import compute_tax_position
         result = compute_tax_position(40000, 2000, 0, 2025)
         disclaimer = result.get("disclaimer", "")
         assert "tax advice" in disclaimer.lower(), "Disclaimer must reference 'tax advice'"
@@ -94,7 +94,7 @@ class TestStructuredOutput:
 
     def test_filing_draft_disclaimer_present(self) -> None:
         """FilingDraft disclaimer must be present and strong."""
-        from backend.models import FilingDraft, FilingStatus, Form11DraftLine
+        from models import FilingDraft, FilingStatus, Form11DraftLine
         from decimal import Decimal
         draft = FilingDraft(
             tax_year=2025,
@@ -115,7 +115,7 @@ class TestStructuredOutput:
 
     def test_advisory_response_requires_citations(self) -> None:
         """AdvisoryResponse must have at least one citation."""
-        from backend.models import AdvisoryResponse
+        from models import AdvisoryResponse
         resp = AdvisoryResponse(
             question="What is my net if I take a €5k contract?",
             answer="...",

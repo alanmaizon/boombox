@@ -12,8 +12,8 @@ from datetime import date
 from decimal import Decimal
 from typing import Any
 
-from backend.models import IncomeRecord, IncomeSource
-from backend.storage import get_income_records, get_ytd_income, persist_income_record
+from models import IncomeRecord, IncomeSource
+from storage import get_income_records, get_ytd_income, persist_income_record
 
 _MOCK = os.getenv("BOOMBOX_MOCK", "false").lower() == "true"
 
