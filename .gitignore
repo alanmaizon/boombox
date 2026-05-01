@@ -4,13 +4,18 @@
 /node_modules
 /.pnp
 .pnp.js
+frontend/node_modules/
 
 # testing
 /coverage
+.pytest_cache/
+__pycache__/
+*.pyc
 
 # next.js
 /.next/
 /out/
+frontend/.next/
 
 # production
 /build
@@ -34,3 +39,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Python
+*.egg-info/
+dist/
+*.egg
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# Secrets / sensitive data — never commit
+*.key
+*.pem
+*_secret*
+*_credentials*
+service_account*.json
+

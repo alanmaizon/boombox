@@ -1,0 +1,202 @@
+{
+  "tax_year": 2025,
+  "effective_date": "2025-01-01",
+  "legislation": "Finance Act 2025",
+  "budget": "Budget 2026",
+  "source_primary": "https://www.revenue.ie/en/tax-professionals/tdm/income-tax-capital-gains-tax-corporation-tax/part-15/15-01-45.pdf",
+  "income_tax": {
+    "description": "Income Tax bands for sole traders under self-assessment (Schedule D Case I/II)",
+    "source": "https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/tax-relief-charts/index.aspx",
+    "statute": "Taxes Consolidation Act 1997, Part 2",
+    "bands": [
+      {
+        "label": "Standard rate band (single)",
+        "lower": 0,
+        "upper": 44000,
+        "rate": 0.20,
+        "source": "https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/tax-relief-charts/index.aspx"
+      },
+      {
+        "label": "Higher rate band (single)",
+        "lower": 44000,
+        "upper": null,
+        "rate": 0.40,
+        "source": "https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/tax-relief-charts/index.aspx"
+      }
+    ],
+    "credits": {
+      "personal_credit": {
+        "amount": 1875,
+        "description": "Personal Tax Credit (single)",
+        "source": "https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/tax-relief-charts/index.aspx"
+      },
+      "earned_income_credit": {
+        "amount": 1875,
+        "description": "Earned Income Credit (sole trader / self-employed)",
+        "source": "https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/earned-income-tax-credit/index.aspx",
+        "statute": "TCA 1997 s.472AB"
+      }
+    }
+  },
+  "usc": {
+    "description": "Universal Social Charge (USC) for income over €13,000",
+    "source": "https://www.revenue.ie/en/jobs-and-pensions/usc/index.aspx",
+    "statute": "Finance (No. 2) Act 2008, Part 18D; subsequently Finance Act 2011",
+    "exemption_threshold": 13000,
+    "bands": [
+      {
+        "label": "USC Band 1",
+        "lower": 0,
+        "upper": 12012,
+        "rate": 0.005,
+        "source": "https://www.revenue.ie/en/jobs-and-pensions/usc/index.aspx"
+      },
+      {
+        "label": "USC Band 2",
+        "lower": 12012,
+        "upper": 25760,
+        "rate": 0.02,
+        "source": "https://www.revenue.ie/en/jobs-and-pensions/usc/index.aspx"
+      },
+      {
+        "label": "USC Band 3",
+        "lower": 25760,
+        "upper": 70044,
+        "rate": 0.04,
+        "source": "https://www.revenue.ie/en/jobs-and-pensions/usc/index.aspx"
+      },
+      {
+        "label": "USC Band 4 (surcharge above €70,044)",
+        "lower": 70044,
+        "upper": null,
+        "rate": 0.08,
+        "source": "https://www.revenue.ie/en/jobs-and-pensions/usc/index.aspx"
+      }
+    ],
+    "reduced_rate": {
+      "rate": 0.02,
+      "description": "Reduced rate (2%) applies to all income for persons aged 70+ or with a full medical card, income ≤ €60,000",
+      "source": "https://www.revenue.ie/en/jobs-and-pensions/usc/reduced-rate-usc.aspx"
+    }
+  },
+  "prsi": {
+    "description": "Pay Related Social Insurance for self-employed (Class S)",
+    "source": "https://www.gov.ie/en/publication/7b1b78-rates-of-pay-related-social-insurance-prsi-contributions/",
+    "statute": "Social Welfare Consolidation Act 2005, Part 2",
+    "class_s": {
+      "rate": 0.04,
+      "minimum_annual": 500,
+      "description": "Class S PRSI: 4% on all reckonable income (minimum €500 per year)",
+      "source": "https://www.citizensinformation.ie/en/social-welfare/irish-social-welfare-system/social-insurance-prsi/class-s-prsi/"
+    }
+  },
+  "mileage": {
+    "description": "Civil Service mileage rates for business travel, as applied by AVASO / Revenue-approved rates",
+    "source": "https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/travel/motor-travel-rates/index.aspx",
+    "statute": "TCA 1997 s.192(2)",
+    "avaso_rate_per_km": 0.44,
+    "avaso_minimum_round_trip_km": 40,
+    "rates": [
+      {
+        "band_label": "Band 1 (0–1,500 km)",
+        "lower_km": 0,
+        "upper_km": 1500,
+        "rate_per_km": 0.4390,
+        "source": "https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/travel/motor-travel-rates/index.aspx"
+      },
+      {
+        "band_label": "Band 2 (1,501–5,500 km)",
+        "lower_km": 1500,
+        "upper_km": 5500,
+        "rate_per_km": 0.4780,
+        "source": "https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/travel/motor-travel-rates/index.aspx"
+      },
+      {
+        "band_label": "Band 3 (5,501–25,000 km)",
+        "lower_km": 5500,
+        "upper_km": 25000,
+        "rate_per_km": 0.2110,
+        "source": "https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/travel/motor-travel-rates/index.aspx"
+      },
+      {
+        "band_label": "Band 4 (25,001+ km)",
+        "lower_km": 25000,
+        "upper_km": null,
+        "rate_per_km": 0.1320,
+        "source": "https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/travel/motor-travel-rates/index.aspx"
+      }
+    ]
+  },
+  "vat": {
+    "description": "VAT thresholds for sole traders providing services",
+    "source": "https://www.revenue.ie/en/vat/vat-registration/who-should-register-for-vat/index.aspx",
+    "statute": "Value-Added Tax Consolidation Act 2010",
+    "thresholds": {
+      "services": {
+        "amount": 40000,
+        "description": "Annual threshold for VAT registration (services)",
+        "source": "https://www.revenue.ie/en/vat/vat-registration/who-should-register-for-vat/index.aspx"
+      },
+      "goods": {
+        "amount": 80000,
+        "description": "Annual threshold for VAT registration (goods / mixed supply)",
+        "source": "https://www.revenue.ie/en/vat/vat-registration/who-should-register-for-vat/index.aspx"
+      }
+    },
+    "standard_rate": {
+      "rate": 0.23,
+      "description": "Standard VAT rate",
+      "source": "https://www.revenue.ie/en/vat/vat-rates/index.aspx"
+    },
+    "reduced_rate": {
+      "rate": 0.135,
+      "description": "Reduced VAT rate (tourism, hospitality, repair services)",
+      "source": "https://www.revenue.ie/en/vat/vat-rates/index.aspx"
+    }
+  },
+  "deadlines": {
+    "form11_filing": {
+      "description": "Annual self-assessment filing deadline (Form 11 via ROS)",
+      "date": "October 31",
+      "source": "https://www.revenue.ie/en/self-assessment-and-self-employment/filing-your-tax-return/key-dates.aspx"
+    },
+    "preliminary_tax": {
+      "description": "Preliminary Tax payment deadline (at least 90% of final liability or 100% of prior year)",
+      "date": "October 31",
+      "source": "https://www.revenue.ie/en/self-assessment-and-self-employment/preliminary-tax/index.aspx",
+      "statute": "TCA 1997 s.958"
+    },
+    "income_tax_balance": {
+      "description": "Balance of Income Tax due after preliminary tax",
+      "date": "October 31",
+      "source": "https://www.revenue.ie/en/self-assessment-and-self-employment/filing-your-tax-return/key-dates.aspx"
+    }
+  },
+  "expense_categories": {
+    "description": "Allowable business expense categories for sole traders under Schedule D Case I",
+    "source": "https://www.revenue.ie/en/self-assessment-and-self-employment/expenses/index.aspx",
+    "statute": "TCA 1997 s.81",
+    "categories": [
+      {"code": "TRAVEL", "label": "Travel and subsistence", "allowable": true},
+      {"code": "EQUIPMENT", "label": "Equipment and tools", "allowable": true},
+      {"code": "SOFTWARE", "label": "Software and subscriptions", "allowable": true},
+      {"code": "PHONE", "label": "Phone and broadband", "allowable": true, "notes": "Business proportion only"},
+      {"code": "HOME_OFFICE", "label": "Home office (heat, light, broadband)", "allowable": true, "notes": "Business proportion only; no capital allowance on primary residence"},
+      {"code": "PROFESSIONAL_FEES", "label": "Professional fees (accountant, legal)", "allowable": true},
+      {"code": "TRAINING", "label": "Training and CPD", "allowable": true},
+      {"code": "MARKETING", "label": "Marketing and advertising", "allowable": true},
+      {"code": "BANK_CHARGES", "label": "Bank charges and fees", "allowable": true},
+      {"code": "CLOTHING", "label": "Clothing (non-uniform)", "allowable": false, "notes": "Personal clothing not deductible"},
+      {"code": "FOOD", "label": "Food and entertainment (client)", "allowable": false, "notes": "Client entertainment is explicitly disallowable per TCA 1997 s.840"},
+      {"code": "MILEAGE", "label": "Business mileage (non-reimbursed)", "allowable": true}
+    ]
+  },
+  "earned_income_credit": {
+    "description": "Earned Income Credit for self-employed individuals",
+    "amount": 1875,
+    "maximum": 1875,
+    "rate_of_qualifying_income": 0.20,
+    "source": "https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/earned-income-tax-credit/index.aspx",
+    "statute": "TCA 1997 s.472AB"
+  }
+}
